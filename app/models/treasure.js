@@ -9,7 +9,7 @@ function Treasure(o){
   this.difficulty=parseInt(o.difficulty);
   this.order=parseInt(o.order);
   this.photos=[];
-  this.hints=o.hints;
+  this.hints=makeArray(o.hints);
   this.tags = o.tags;
   this.tags = this.tags.split(',').map(function(i){return i.trim();});
   this.isFound=false;
@@ -19,7 +19,7 @@ Object.defineProperty(Treasure, 'collection', {
   get: function(){return global.mongodb.collection('treasure');}
 });
 
-Treasure.query = function(cb){
+Treasure.found = function(cb){
   Treasure.collection.find().toArray(cb);
 };
 
@@ -31,10 +31,22 @@ Treasure.findById = function(id, cb){
   });
 };
 
+Treasure.prototype.save = function(cb){
+  Treasure.collection.save(this, function(err, object){
+    cb();
+  });
+};
 
 module.exports = Treasure;
 
 
 
 ///Helper Function
-
+function makeArray(o){
+  var keys  = Object.keys(o),
+      hints = [];
+  keys.forEach(function(key){
+    hints.push(o[key]);
+  });
+  return hints;
+}

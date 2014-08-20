@@ -35,17 +35,28 @@ describe('Treasure', function(){
       expect(t.loc.lng).to.be.closeTo(123.084, 0.01);
       expect(t.photos).to.have.length(0);
       expect(t.tags).to.have.length(2);
+      expect(t.hints).to.have.length(2);
     });
   });
 
-  describe('.query', function(){
+  describe('.found', function(){
     it('should get all treasures', function(done){
-      Treasure.query(function(err, treasures){
+      Treasure.found(function(err, treasures){
         expect(treasures).to.have.length(3);
         done();
       });
     });
   });
+
+  describe('#save', function(){
+    it('should save to the database', function(done){
+      t.save(function(){
+        expect(t._id).to.be.instanceof(Mongo.ObjectID);
+        done();
+      });
+    });
+  });
+
 
   describe('.findById', function(){
     it('should find a treasure in database by it\'s ID', function(done){
