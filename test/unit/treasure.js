@@ -9,8 +9,7 @@ var expect    = require('chai').expect,
     Mongo     = require('mongodb'),
     cp        = require('child_process'),
     db        = 'template-test',
-    o,
-    t;
+    obj       = {name:['Rubies'], difficulty:['1'], order:['4'], loc:['Siberia', '0', '0'], tags:['tag1, tag2'], photos:[], hints:['hint 1', 'hint 2']};
 
 describe('Treasure', function(){
   before(function(done){
@@ -21,27 +20,32 @@ describe('Treasure', function(){
 
   beforeEach(function(done){
     cp.execFile(__dirname + '/../scripts/clean-db.sh', [db], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
-      o = {name:'diamonds', loc:{name:'Brazil', lat:32.034, lng:123.084}, difficulty:1, order:'1', hints:{ 1:'dig', 2:'find'}, tags:'fun,shiny'},
-      t = new Treasure(o);
       done();
     });
   });
 
   describe('constructor', function(){
     it('should create a new Treasure object', function(){
+      var t = new Treasure(obj);
       expect(t).to.be.instanceof(Treasure);
-      expect(t.name).to.equal('diamonds');
-      expect(t.loc.lat).to.be.closeTo(32.034, 0.01);
-      expect(t.loc.lng).to.be.closeTo(123.084, 0.01);
-      expect(t.photos).to.have.length(0);
+      expect(t.name).to.equal('Rubies');
+      expect(t.difficulty).to.equal(1);
+      expect(t.order).to.equal(4);
+      expect(t.loc[0]).to.equal('Siberia');
+      expect(t.loc[1]).to.equal(0);
+      expect(t.loc[2]).to.equal(0);
       expect(t.tags).to.have.length(2);
+      expect(t.tags[1]).to.equal('tag2');
+      expect(t.photos).to.have.length(0);
       expect(t.hints).to.have.length(2);
+      expect(t.hints[0]).to.equal('hint 1');
+      expect(t.isFound).to.equal(false);
     });
   });
 
-  describe('.found', function(){
+  describe('.query', function(){
     it('should get all treasures', function(done){
-      Treasure.found(function(err, treasures){
+      Treasure.query(function(err, treasures){
         expect(treasures).to.have.length(3);
         done();
       });
@@ -50,6 +54,7 @@ describe('Treasure', function(){
 
   describe('#save', function(){
     it('should save to the database', function(done){
+      var t = new Treasure(obj);
       t.save(function(){
         expect(t._id).to.be.instanceof(Mongo.ObjectID);
         done();
