@@ -1,0 +1,33 @@
+{
+  "_id":{"$oid":"000000000000000000000001"},
+  "name":"Pile of Cash",
+  "loc":{"name":"Grand Canyon", "lat":36.1000, "lng":112.1000},
+  "difficulty":5,
+  "order":2,
+  "photos":["http://images.com/london.jpg"],
+  "hints":["search", "dig"],
+  "tags":["fun", "shiny"],
+  "isFound":false
+}
+{
+  "_id":{"$oid":"000000000000000000000002"},
+  "name":"Gold",
+  "loc":{"name":"Flagstaff, AZ", "lat":35.1992, "lng":111.6311},
+  "difficulty":5,
+  "order":2,
+  "photos":["http://images.com/london.jpg"],
+  "hints":["search", "dig"],
+  "tags":["fun", "shiny"],
+  "isFound":false
+}
+{
+  "_id":{"$oid":"000000000000000000000003"},
+  "name":"Diamonds",
+  "loc":{"name":"Siberia", "lat":32.2217, "lng":110.9264},
+  "difficulty":5,
+  "order":2,
+  "photos":["http://images.com/london.jpg"],
+  "hints":["search", "dig"],
+  "tags":["fun", "shiny"],
+  "isFound":false
+}
