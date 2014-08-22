@@ -1,0 +1,42 @@
+extends ../shared/template
+block content
+  h2 Add A Treasure
+  .col-xs-3
+  .col-xs-6#form
+    .row
+      form(role='form', method='post', action='/treasures', enctype='multipart/form-data')
+       .col-xs-6
+         .form-group
+           label(for='treasureName') Treasure Name:
+           input#treasureName.form-control(type='text', placeholder='Treasure Name', name='name')
+         .form-group
+           label(for='locName') Location:
+           input#locName.form-control(type='text', placeholder='Las Vegas, NV', name='loc')
+           input#locLat.form-control(type='hidden', name='loc')
+           input#locLng.form-control(type='hidden', name='loc')
+         .form-group#hints
+           label(for='hint') Hints:
+           input#hint.form-control(type='text', placeholder='Dig for treasure', name='hints')
+         button#addHint.btn.btn-basic.btn-lg(type='button') Add Hint
+       .col-xs-6
+         .form-group
+           label(for='photos') Upload Photo:
+           input.formColor.form-control#photos(type='file',name='photos', multiple=true)
+         .form-group
+           label(for='difficulty') Difficulty:
+           br
+           select.form-control#difficult(name='difficulty', style='background-color: #FFC179;')
+             option(value='1') Easy
+             option(value='2') Medium
+             option(value='3') Hard
+         .form-group
+           label(for='tags') Tags:
+           input#tags.form-control(type='text', placeholder='elegance, fun, style', name='tags')
+         .form-group
+           label(for='order') Order:
+           input#order.form-control(type='number', placeholder='1', name='order')
+         button.btn.btn-basic.btn-lg(type='submit') Submit
+  .col-xs-3
+
+block scripts
+  script(src='/js/user/newTreasure.js')

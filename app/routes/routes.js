@@ -4,8 +4,8 @@ var morgan         = require('morgan'),
     bodyParser     = require('body-parser'),
     methodOverride = require('express-method-override'),
     less           = require('less-middleware'),
-    home           = require('../controllers/home'),
-    treasures      = require('../controllers/treasures');
+    treasure       = require('../controllers/treasures'),
+    home           = require('../controllers/home');
 
 module.exports = function(app, express){
   app.use(morgan('dev'));
@@ -15,14 +15,11 @@ module.exports = function(app, express){
   app.use(methodOverride());
 
   app.get('/', home.index);
-  app.get('/about', home.about);
-  app.get('/faq', home.faq);
-  app.get('/contact', home.contact);
-
-  app.get('/treasures/new', treasures.init);
-  app.post('/treasures', treasures.create);
-  //app.get('/treasures', treasures.index);
+  app.get('/treasures', treasure.index);
+  app.get('/treasures/new', treasure.init);
+  app.post('/treasures', treasure.create);
+  app.get('/treasures/:id', treasure.view);
+  app.get('/treasures/:id/found', treasure.found);
 
   console.log('Express: Routes Loaded');
 };
-

@@ -1,0 +1,27 @@
+extends ../shared/template
+block content
+  .row
+    #map
+  .row
+    h2 My Treasures:
+    .col-xs-12
+      table.table.table-hover.table-bordered
+        thead
+          tr
+            th Name
+            th Location
+            th Difficulty
+            th Tags
+            th Order
+            th Found?
+        tbody
+          each treasure in treasures
+            tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
+              td: a(href='/treasures/#{treasure._id}')= treasure.name
+              td= treasure.loc.name
+              td= treasure.difficulty
+              td= treasure.tags
+              td= treasure.order
+              td= treasure.isFound
+block scripts
+  script(src='/js/user/home.js')

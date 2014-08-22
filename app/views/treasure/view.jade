@@ -1,0 +1,22 @@
+extends ../shared/template
+block content
+  h1 Your Treasure:
+  .row#data(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
+    .col-xs-6
+      #map(style='height: 500px; width: 500px;')
+    .col-xs-6
+      h2= treasure.name
+      h3 Location: #{treasure.loc.name}
+      .col-xs-6
+        h3 Hints:
+        ul
+          each hint in treasure.hints
+            li= hint
+      .col-xs-6
+        a.btn.btn-primary(href='/treasures/#{treasure._id}/found') Found it!
+  .col-xs-4
+    #photos
+      each photo in treasure.photos
+        img.img-thumbnail(src=photo)
+block scripts
+  script(src='/js/user/viewTreasure.js')

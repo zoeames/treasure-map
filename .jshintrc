@@ -1,5 +1,4 @@
 {
-  "camelcase": true,
   "curly": true,
   "eqeqeq": true,
   "forin": true,
@@ -10,7 +9,6 @@
   "noarg": true,
   "noempty": true,
   "nonbsp": true,
-  "quotmark": "single",
   "undef": true,
   "unused": "vars",
   "strict": true,
@@ -24,4 +22,3 @@
 
   "globals": {}
 }
-
